@@ -42,8 +42,8 @@ def cov(x,y): # returns the covariance of X and Y
     avgX = avg(x)
     avgY = avg(y)
     xy = []
-    for i in xy:
-        i = (x- avgX)*(y - avgY)
+    for i in range(len(x)):
+        xy[i] = (x[i]- avgX)*(y[i] - avgY)
     return avg(xy)
 
 def pearson(x,y): # returns the Pearson correlation coefficient of X and Y
@@ -54,9 +54,9 @@ def pearson(x,y): # returns the Pearson correlation coefficient of X and Y
 def linear_reg(points): # performs a linear regression and returns the line equation
     x = []
     y = []
-    for point in points:
-        x = point.x
-        y = point.y
+    for i in range(len(points)):
+        x[i] = points[i].x
+        y[i] = points[i].y
     a = cov(x,y) / var(x)
     b = avg(y) - a* avg(x)
     l = Line(a,b)
