@@ -36,9 +36,22 @@ response = client.get_metric_statistics(
 # sort the datapoints by timestamp
 datapoints_sorted = sorted(response["Datapoints"], key=lambda x: x["Timestamp"])
 
+
+# putting points of timestamp/utilization in arrays
 list_time = []
 list_utilization = []
 for datapoint in datapoints_sorted:
     list_time.append(f"{datapoint['Timestamp']}")
     list_utilization.append(f"{datapoint['Average']}")
     # print(f"{datapoint['Timestamp']}: {datapoint['Average']}")
+
+# setting every timestamp in a simple format
+string = ""
+list_time_first5 = []
+for str in list_time:
+    devided = str.split(" ")
+    first5 = devided[1][0:5]
+    list_time_first5.append(first5)
+
+# timestamp arry- list_time_first5
+# utilization array- list_utilization
