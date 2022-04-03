@@ -20,15 +20,16 @@ class anomalyDetection:
 
 
 class normal:
-    def __init__(self, top_th, bot_th, longest_incline, longest_decline):
-        self.top_th = top_th
-        self.bot_th = bot_th
-        self.longest_incline = longest_incline
-        self.longest_decline = longest_decline
+    def __init__(self, top, bot, max_slope, min_slope):
+        self.top = top
+        self.bot = bot
+        self.max_slope = max_slope
+        self.min_slope = min_slope
 
     @abstractmethod
     def attach(self, observer: controller) -> None:
         pass
+
     def learnNormal(self,csvfile):
         devided = ""
         times = []
