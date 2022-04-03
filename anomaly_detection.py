@@ -1,7 +1,13 @@
 import details
+from controller import controller
 from details import Point
 
 import csv
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from random import randrange
+from typing import List
+
 
 class anomalyDetection:
     th = 0.9
@@ -11,6 +17,8 @@ class anomalyDetection:
     def __init__(self):
         self.normalModel = None
 
+
+
 class normal:
     def __init__(self, top_th, bot_th, longest_incline, longest_decline):
         self.top_th = top_th
@@ -18,7 +26,9 @@ class normal:
         self.longest_incline = longest_incline
         self.longest_decline = longest_decline
 
-
+    @abstractmethod
+    def attach(self, observer: controller) -> None:
+        pass
     def learnNormal(self,csvfile):
         devided = ""
         times = []
