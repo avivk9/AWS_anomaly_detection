@@ -5,3 +5,6 @@ class anomalyDetection:
         self.normalModel = None
     def learnNormal(self,var1,var2):
         pass
+
+
+    def detect(self, times, utilizations):
