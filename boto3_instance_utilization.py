@@ -45,9 +45,14 @@ def update():
     datapoints_sorted = sorted(response["Datapoints"], key=lambda x: x["Timestamp"])
 
     # putting points of timestamp/utilization in arrays
+    i = 0
+    list_time = []
+    list_utilization = []
     for datapoint in datapoints_sorted:
         list_time.append(f"{datapoint['Timestamp']}")
         list_utilization.append(f"{datapoint['Average']}")
+        print(i)
+        i += 1
         # print(f"{datapoint['Timestamp']}: {datapoint['Average']}")
 
     # setting every timestamp in a simple format
@@ -57,11 +62,6 @@ def update():
         first5 = devided[1][0:5]
         list_time_first5.append(first5)
 
-
-print(list_time_first5)
-print(list_utilization)
-
-
 def getTimes():
     update()
     return list_time_first5
@@ -70,6 +70,9 @@ def getTimes():
 def getUtilizations():
     update()
     return stringsToFloats(list_utilization)
+
+print(getTimes())
+print(getUtilizations())
 
 # timestamp arry- list_time_first5
 # utilization array- list_utilization

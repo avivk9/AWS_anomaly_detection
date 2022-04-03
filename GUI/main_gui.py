@@ -2,11 +2,11 @@ from pandas import DataFrame
 import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import sys
 
 
 from boto3_instance_utilization import list_time_first5 as list_time
 from boto3_instance_utilization import list_utilization as list_util
+from boto3_instance_utilization import getUtilizations, getTimes
 from utils.functions import stringsToFloats as Stf
 
 
@@ -14,9 +14,8 @@ def vp_start_gui():
     global root
     root = tk.Tk()
     """ INSERT YOUR WHOLE CODE HERE"""
-    list_utilization = Stf(list_util)
-    data_cpu = {'Time': list_time,
-                'CPU utilization': list_utilization
+    data_cpu = {'Time': getTimes(),
+                'CPU utilization': getUtilizations()
                 }
     df_cpu = DataFrame(data_cpu, columns=['Time', 'CPU utilization'])
 
