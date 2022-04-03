@@ -1,5 +1,9 @@
 import details
 from details import Point
+from __future__ import annotations
+from abc import ABC, abstractmethod
+from random import randrange
+from typing import List
 
 class anomalyDetection:
     th = 0.9
@@ -9,15 +13,10 @@ class anomalyDetection:
     def __init__(self):
         self.normalModel = None
 
-    def learnNormal(self,var1,var2):
-        for i in range(len(var1)):
-            maxAbsPear =0
-            maxPlace = -1
-            valX = var1
-            for j in range(i+1,len(var2)):
-                valY = var2[j]
-                pear = details.pearson(valX,valY)
-                if(abs(pear) > self.th & abs(pear)>maxAbsPear)
+    
+
+    def learnNormal(self,csvFileName):
+
 
 
 
