@@ -9,28 +9,25 @@ from random import randrange
 from typing import List
 
 
-class anomalyDetection:
-    th = 0.9
-    normalModel = []
-    reports = []
-    correlated_list = []
-    def __init__(self):
-        self.normalModel = None
-
-
-
 class normal:
     def __init__(self, top, bot, max_slope, min_slope):
-        self.top = top
-        self.bot = bot
-        self.max_slope = max_slope
-        self.min_slope = min_slope
+        self.top = top * 1.1
+        self.bot = bot * 1.1
+        self.max_slope = max_slope * 1.1
+        self.min_slope = min_slope * 0.9
+
+
+class anomalyDetection:
+    normalModel = []
+
+    def __init__(self):
+        self.normalModel = None
 
     @abstractmethod
     def attach(self, observer: controller) -> None:
         pass
 
-    def learnNormal(self,csvfile):
+    def learnNormal(self, csvfile):
         devided = ""
         times = []
         utilizations = []
@@ -43,10 +40,16 @@ class normal:
                 times.append(devided[0])
                 utilizations.append(devided[1])
 
-        for i in range(le)
+        top = utilizations[0]
+        bot = utilizations[0]
+        for i in range(len(utilizations)):
+            if utilizations[i] > top:
+                top = utilizations[i]
+            elif utilizations[i] < bot:
+                bot = utilizations[i]
 
-        for i in range(len(times)-1):
-            slopes[i] = (utilizations[i+1]-utilizations[i])/(times[i+1]-times[i])
+        for i in range(len(times) - 1):
+            slopes[i] = (utilizations[i + 1] - utilizations[i]) / (times[i + 1] - times[i])
 
         max_slope = slopes[0]
         min_slope = slopes[0]
@@ -57,7 +60,7 @@ class normal:
             if slopes[i] < min_slope:
                 min_slope = slopes[i]
 
-
+        self.normalModel = normal(top, bot, max_slope, min_slope)
 
     def detect(self, times, utilizations):
         anomaly = ""
@@ -79,4 +82,3 @@ class normal:
         if m <= -2:
             return "server_cooled_hard"
         return "normal_status"
-
