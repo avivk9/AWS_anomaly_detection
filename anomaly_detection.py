@@ -13,7 +13,8 @@ class anomalyDetection:
     def __init__(self):
         self.normalModel = None
 
-    
+    @abstractmethod
+    def attach(self,):
 
     def learnNormal(self,csvFileName):
 
