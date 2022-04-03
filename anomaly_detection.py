@@ -43,20 +43,28 @@ class normal:
                 times.append(devided[0])
                 utilizations.append(devided[1])
 
+        for i in range(le)
+
         for i in range(len(times)-1):
             slopes[i] = (utilizations[i+1]-utilizations[i])/(times[i+1]-times[i])
 
-        for i in range(len(slopes))
+        max_slope = slopes[0]
+        min_slope = slopes[0]
 
+        for i in range(len(slopes)):
+            if slopes[i] > max_slope:
+                max_slope = slopes[i]
+            if slopes[i] < min_slope:
+                min_slope = slopes[i]
 
 
 
     def detect(self, times, utilizations):
-        anomalys = []
+        anomaly = ""
         reports = []
         points = []
         for i in range(len(points)):
             points[i] = Point(times[i], utilizations[i])
 
-        return anomalys
+        return anomaly
 
