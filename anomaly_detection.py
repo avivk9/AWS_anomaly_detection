@@ -62,8 +62,6 @@ class anomalyDetection:
 
     def detect(self, times, utilizations):
         anomaly = ""
-        # reports = []
-        # points = []
         last = len(utilizations) - 1
         # 0 usage
         if utilizations[last] <= 1 and utilizations[last - 1] <= 1 and utilizations[last - 2] <= 1:
