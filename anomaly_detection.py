@@ -1,11 +1,12 @@
 import details
-
+from details import Point
 
 class anomalyDetection:
     th = 0.9
     normalModel = []
     def __init__(self):
         self.normalModel = None
+
     def learnNormal(self,var1,var2):
         for i in range(len(var1)):
             maxAbsPear =0
@@ -17,4 +18,8 @@ class anomalyDetection:
                 if(abs(pear) > self.th & abs(pear)>maxAbsPear)
 
 
+
     def detect(self, times, utilizations):
+        points = []
+        for i in range(len(points)):
+            points[i] = Point(times[i], utilizations[i])
