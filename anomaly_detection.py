@@ -28,5 +28,5 @@ class anomalyDetection:
             points[i] = Point(times[i], utilizations[i])
 
     for cf in correlated_list:
-        for(int k = 0; k < a)
+        for(int k = 0; k < len)
 
