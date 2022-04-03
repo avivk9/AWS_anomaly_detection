@@ -53,5 +53,8 @@ for str in list_time:
     first5 = devided[1][0:5]
     list_time_first5.append(first5)
 
+print(list_time_first5)
+print(list_utilization)
+
 # timestamp arry- list_time_first5
 # utilization array- list_utilization
