@@ -1,6 +1,4 @@
-import details
 from controller import controller
-from details import Point
 
 import csv
 from __future__ import annotations

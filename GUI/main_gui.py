@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from boto3_instance_utilization import update_time, update_cpu
-
+from utils.simple_detector import  detect as det
 
 def vp_start_gui():
     global root
@@ -24,7 +24,7 @@ def vp_start_gui():
     df_cpu.plot(kind='line', legend=True, ax=ax_cpu, color='b', marker='o', fontsize=10)
     ax_cpu.set_title('CPU utilization over time')
 
-    status = "Nothing Yet" # get from detect using list_cpu, list_time
+    status = "status:" + det(list_cpu) # get from detect using list_cpu, list_time
     myLabel = tk.Label(root, text=status)
 
     btn = tk.Button(root, text='REFRESH', bd='2',
