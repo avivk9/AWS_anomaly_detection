@@ -1,9 +1,7 @@
 import details
 from details import Point
-from __future__ import annotations
-from abc import ABC, abstractmethod
-from random import randrange
-from typing import List
+
+import csv
 
 class anomalyDetection:
     th = 0.9
@@ -13,20 +11,41 @@ class anomalyDetection:
     def __init__(self):
         self.normalModel = None
 
-    @abstractmethod
-    def attach(self,):
+class normal:
+    def __init__(self, top_th, bot_th, longest_incline, longest_decline):
+        self.top_th = top_th
+        self.bot_th = bot_th
+        self.longest_incline = longest_incline
+        self.longest_decline = longest_decline
 
-    def learnNormal(self,csvFileName):
+
+    def learnNormal(self,csvfile):
+        devided = ""
+        times = []
+        utilizations = []
+        slopes = []
+
+        with open(csvfile) as file:
+            reader = csv.reader(file)
+            for row in reader:
+                devided = row.split(",")
+                times.append(devided[0])
+                utilizations.append(devided[1])
+
+        for i in range(len(times)-1):
+            slopes[i] = (utilizations[i+1]-utilizations[i])/(times[i+1]-times[i])
+
+        for i in range(len(slopes))
 
 
 
 
     def detect(self, times, utilizations):
+        anomalys = []
         reports = []
         points = []
         for i in range(len(points)):
             points[i] = Point(times[i], utilizations[i])
 
-    for cf in correlated_list:
-        for(int k = 0; k < len)
+        return anomalys
 
