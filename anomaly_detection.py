@@ -4,6 +4,8 @@ from details import Point
 class anomalyDetection:
     th = 0.9
     normalModel = []
+    reports = []
+    correlated_list = []
     def __init__(self):
         self.normalModel = None
 
@@ -20,6 +22,11 @@ class anomalyDetection:
 
 
     def detect(self, times, utilizations):
+        reports = []
         points = []
         for i in range(len(points)):
             points[i] = Point(times[i], utilizations[i])
+
+    for cf in correlated_list:
+        for(int k = 0; k < a)
+
