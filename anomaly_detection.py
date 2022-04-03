@@ -61,10 +61,22 @@ class normal:
 
     def detect(self, times, utilizations):
         anomaly = ""
-        reports = []
-        points = []
-        for i in range(len(points)):
-            points[i] = Point(times[i], utilizations[i])
+        # reports = []
+        # points = []
+        last = len(utilizations) - 1
+        # 0 usage
+        if utilizations[last] <= 1 and utilizations[last - 1] <= 1 and utilizations[last - 2] <= 1:
+            return "empty_server"
+        # low usage
+        if utilizations[last] <= 30 and utilizations[last - 1] <= 30 and utilizations[last - 2] <= 30:
+            return "change_server_host"
+        # calculate m
+        m = utilizations[last] - utilizations[last - 1] / utilizations[last - 1] - utilizations[last - 2]
 
-        return anomaly
+        #
+        if m >= 2:
+            return "hacked"
+        if m <= -2:
+            return "server_cooled_hard"
+        return "normal_status"
 
