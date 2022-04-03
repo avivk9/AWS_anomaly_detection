@@ -2,6 +2,8 @@ import boto3
 from datetime import datetime, timedelta
 from credentials import AWS_ACCESS_KEY, AWS_SECRET_KEY
 
+from utils.functions import stringsToFloats
+
 # define the instance ID we'd like to inspect
 INSTANCE_ID = "i-0de58090ae091a863"
 
@@ -30,12 +32,11 @@ response = client.get_metric_statistics(
 )
 # inspect the datapoints
 # for datapoint in response["Datapoints"]:
-    # if "Average" in datapoint:
-         # print(f"Time: {datapoint['Timestamp']}, Average: {datapoint['Average']}")
+# if "Average" in datapoint:
+# print(f"Time: {datapoint['Timestamp']}, Average: {datapoint['Average']}")
 
 # sort the datapoints by timestamp
 datapoints_sorted = sorted(response["Datapoints"], key=lambda x: x["Timestamp"])
-
 
 # putting points of timestamp/utilization in arrays
 list_time = []
@@ -55,6 +56,14 @@ for str in list_time:
 
 print(list_time_first5)
 print(list_utilization)
+
+
+def getTimes():
+    return list_time_first5
+
+
+def getUtilizations():
+    return stringsToFloats(list_utilization)
 
 # timestamp arry- list_time_first5
 # utilization array- list_utilization
