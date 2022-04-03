@@ -9,9 +9,10 @@ from boto3_instance_utilization import update_time, update_cpu
 def vp_start_gui():
     global root
     root = tk.Tk()
-    """ INSERT YOUR WHOLE CODE HERE"""
-    data_cpu = {'Time': update_time(),
-                'CPU utilization': update_cpu()
+    list_time = update_time()
+    list_cpu = update_cpu()
+    data_cpu = {'Time': list_time,
+                'CPU utilization': list_cpu
                 }
     df_cpu = DataFrame(data_cpu, columns=['Time', 'CPU utilization'])
 
@@ -23,9 +24,12 @@ def vp_start_gui():
     df_cpu.plot(kind='line', legend=True, ax=ax_cpu, color='b', marker='o', fontsize=10)
     ax_cpu.set_title('CPU utilization over time')
 
+    status = "Nothing Yet" # get from detect using list_cpu, list_time
+    myLabel = tk.Label(root, text=status)
+
     btn = tk.Button(root, text='REFRESH', bd='2',
                     command=refresh)
-
+    myLabel.pack(side='top')
     btn.pack(side='top')
     """ CREATE A BUTTON AND ITS command = refresh() which is defined at the bottom"""
     root.mainloop()
@@ -42,4 +46,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
