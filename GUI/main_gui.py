@@ -5,6 +5,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from boto3_instance_utilization import update_time, update_cpu
 
+
 def vp_start_gui():
     global root
     root = tk.Tk()
@@ -30,9 +31,15 @@ def vp_start_gui():
     root.mainloop()
 
 
-if __name__ == '__main__':
-    def refresh():
-        root.destroy()
-        vp_start_gui()
+def refresh():
+    root.destroy()
     vp_start_gui()
+
+
+def main():
+    vp_start_gui()
+
+
+if __name__ == '__main__':
+    main()
 
