@@ -1,6 +1,7 @@
 import boto3
 from datetime import datetime, timedelta
 from credentials import AWS_ACCESS_KEY, AWS_SECRET_KEY
+from utils.functions import stringsToFloats as stf
 
 from utils.functions import stringsToFloats
 
@@ -18,12 +19,10 @@ client = session.client("cloudwatch", region_name="us-east-1")
 
 # get metric statistics about an EC2 instance
 # docs: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.get_metric_statistics
-list_time = []
-list_utilization = []
-list_time_first5 = []
 
 
-def update():
+
+def update_time():
     response = client.get_metric_statistics(
         Namespace="AWS/EC2",
         MetricName="CPUUtilization",
@@ -43,36 +42,57 @@ def update():
 
     # sort the datapoints by timestamp
     datapoints_sorted = sorted(response["Datapoints"], key=lambda x: x["Timestamp"])
-
-    # putting points of timestamp/utilization in arrays
-    i = 0
     list_time = []
-    list_utilization = []
+    list_util = []
+    # putting points of timestamp/utilization in arrays
     for datapoint in datapoints_sorted:
         list_time.append(f"{datapoint['Timestamp']}")
-        list_utilization.append(f"{datapoint['Average']}")
-        print(i)
-        i += 1
+        list_util.append(f"{datapoint['Average']}")
         # print(f"{datapoint['Timestamp']}: {datapoint['Average']}")
-
+    list_time_first5 = []
     # setting every timestamp in a simple format
     string = ""
     for str in list_time:
         devided = str.split(" ")
         first5 = devided[1][0:5]
         list_time_first5.append(first5)
-
-def getTimes():
-    update()
     return list_time_first5
 
 
-def getUtilizations():
-    update()
-    return stringsToFloats(list_utilization)
 
-print(getTimes())
-print(getUtilizations())
+def update_cpu():
+    response = client.get_metric_statistics(
+        Namespace="AWS/EC2",
+        MetricName="CPUUtilization",
+        Dimensions=[{"Name": "InstanceId", "Value": INSTANCE_ID}],
+        StartTime=datetime.utcnow() - timedelta(seconds=3600),
+        EndTime=datetime.utcnow(),
+        Period=300,
+        Statistics=[
+            "Average",
+        ],
+        Unit="Percent",
+    )
 
-# timestamp arry- list_time_first5
-# utilization array- list_utilization
+    # sort the datapoints by timestamp
+    datapoints_sorted = sorted(response["Datapoints"], key=lambda x: x["Timestamp"])
+    list_time = []
+    list_util = []
+    # putting points of timestamp/utilization in arrays
+    for datapoint in datapoints_sorted:
+        list_time.append(f"{datapoint['Timestamp']}")
+        list_util.append(f"{datapoint['Average']}")
+        # print(f"{datapoint['Timestamp']}: {datapoint['Average']}")
+    list_time_first5 = []
+    # setting every timestamp in a simple format
+    string = ""
+    for str in list_time:
+        devided = str.split(" ")
+        first5 = devided[1][0:5]
+        list_time_first5.append(first5)
+    return stf(list_util)
+
+
+print(update_cpu())
+print(update_time())
+

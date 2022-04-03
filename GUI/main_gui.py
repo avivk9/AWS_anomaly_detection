@@ -3,19 +3,14 @@ import tkinter as tk
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-
-from boto3_instance_utilization import list_time_first5 as list_time
-from boto3_instance_utilization import list_utilization as list_util
-from boto3_instance_utilization import getUtilizations, getTimes
-from utils.functions import stringsToFloats as Stf
-
+from boto3_instance_utilization import update_time, update_cpu
 
 def vp_start_gui():
     global root
     root = tk.Tk()
     """ INSERT YOUR WHOLE CODE HERE"""
-    data_cpu = {'Time': getTimes(),
-                'CPU utilization': getUtilizations()
+    data_cpu = {'Time': update_time(),
+                'CPU utilization': update_cpu()
                 }
     df_cpu = DataFrame(data_cpu, columns=['Time', 'CPU utilization'])
 
@@ -27,7 +22,7 @@ def vp_start_gui():
     df_cpu.plot(kind='line', legend=True, ax=ax_cpu, color='b', marker='o', fontsize=10)
     ax_cpu.set_title('CPU utilization over time')
 
-    btn = tk.Button(root, text='Click me !', bd='5',
+    btn = tk.Button(root, text='REFRESH', bd='2',
                     command=refresh)
 
     btn.pack(side='top')
