@@ -20,8 +20,7 @@ client = session.client("cloudwatch", region_name="us-east-1")
 # get metric statistics about an EC2 instance
 # docs: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/cloudwatch.html#CloudWatch.Client.get_metric_statistics
 
-
-
+# return times list
 def update_time():
     response = client.get_metric_statistics(
         Namespace="AWS/EC2",
@@ -59,7 +58,7 @@ def update_time():
     return list_time_first5
 
 
-
+# return the cpu utilization
 def update_cpu():
     response = client.get_metric_statistics(
         Namespace="AWS/EC2",
@@ -92,7 +91,5 @@ def update_cpu():
         list_time_first5.append(first5)
     return stf(list_util)
 
-
-print(update_cpu())
-print(update_time())
-
+#print(update_cpu())
+#print(update_time())

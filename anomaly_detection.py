@@ -1,11 +1,7 @@
-from controller import controller
+# learn about a normal day cycle and learn the machine to predict values #
 
+"""
 import csv
-from __future__ import annotations
-from abc import ABC, abstractmethod
-from random import randrange
-from typing import List
-
 
 class normal:
     def __init__(self, top, bot, max_slope, min_slope, sequence0):
@@ -21,11 +17,6 @@ class anomalyDetection:
 
     def __init__(self):
         self.normalModel = normal(0, 0, 0, 0, 0)
-
-    @abstractmethod
-    def attach(self, observer: controller) -> None:
-        pass
-
     def learnNormal(self, csvfile):
         devided = ""
         times = []
@@ -108,3 +99,11 @@ class anomalyDetection:
         for i in range(self.normalModel.sequence0):
             flag = flag and utilizations[last - i] <= 30
         return flag
+
+def detect_outer(times, utilizations):
+    a = anomalyDetection()
+    a.learnNormal()
+    return a.detect()
+    pass
+
+"""

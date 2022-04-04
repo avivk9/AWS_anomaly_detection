@@ -1,5 +1,21 @@
-def control(status):
+## MAKING EXTRA CHANGES AND ACTIONS IN EACH CASE ##
 
+def control(status):
+    if status is "empty_server":
+        # closing the server
+        pass
+    if status is "change_server_host":
+        # move to a lighter server
+        pass
+    if status is "hacked":
+        # remove users and edit their permissions
+        pass
+    if status is "server_cooled_hard":
+        # notify the server owner
+        pass
+    if status is "normal_status":
+        # all good :)
+        pass
 
 
 

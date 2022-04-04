@@ -9,6 +9,7 @@ from utils.simple_detector import  detect as det
 def vp_start_gui():
     global root
     root = tk.Tk()
+    root.title('SPOT:HACK IT')
     list_time = update_time()
     list_cpu = update_cpu()
     data_cpu = {'Time': list_time,
