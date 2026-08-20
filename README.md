@@ -48,7 +48,3 @@ def detect(utilizations):
 ### GUI
 Using 'Tkinter' and 'Matplotlib' modules we presented the CPU Utilization over Time
 together with the server status and a refresh button
-
-![pic](C:\Users\Aviv\IdeaProjects\AWS_anomaly_detection\cpu graph.PNG)
-
-![pic2](C:\Users\Aviv\IdeaProjects\AWS_anomaly_detection\cpu2.PNG)
